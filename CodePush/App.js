@@ -27,7 +27,10 @@ import {
 
 let codePushOptions = {checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME};
 
-const App: () => React$Node = () => {
+const App = () => {
+  const env = 'prod';
+  const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -38,7 +41,7 @@ const App: () => React$Node = () => {
           <Header />
           {global.HermesInternal == null ? null : (
             <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
+              <Text style={styles.footer}>{whatEnv}</Text>
             </View>
           )}
           <View style={styles.body}>
