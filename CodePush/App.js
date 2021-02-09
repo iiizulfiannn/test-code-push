@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StatusBar} from 'react-native';
-import CodePush from 'react-native-code-push';
+import codePush from 'react-native-code-push';
 
 const App = () => {
   const env = 'prod';
@@ -25,7 +25,7 @@ const App = () => {
   );
 };
 
-export default CodePush({
-  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-  // installMode: CodePush.InstallMode.ON_NEXT_RESUME,
+export default codePush({
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  installMode: codePush.InstallMode.ON_NEXT_RESUME,
 })(App);
