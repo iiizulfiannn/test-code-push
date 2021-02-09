@@ -31,7 +31,7 @@ let codePushOptions = {
 };
 
 const App = () => {
-  const env = 'prod';
+  const env = 'dev';
   const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
 
   return (
