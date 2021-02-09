@@ -15,6 +15,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import CodePush from 'react-native-code-push';
 
 import {
   Header,
@@ -23,6 +24,8 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+let codePushOptions = {checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME};
 
 const App: () => React$Node = () => {
   return (
@@ -111,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default CodePush(codePushOptions)(App);
