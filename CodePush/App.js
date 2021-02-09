@@ -27,5 +27,5 @@ const App = () => {
 
 export default CodePush({
   checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-  installMode: CodePush.InstallMode.ON_NEXT_RESUME,
+  // installMode: CodePush.InstallMode.ON_NEXT_RESUME,
 })(App);
