@@ -154,6 +154,14 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            // Note: CodePush updates shouldn't be tested in Debug mode as they're overriden by the RN packager. However, because CodePush checks for updates in all modes, we must supply a key.
+            resValue "string", "CodePushDeploymentKey", '""'
+        }
+        releaseStaging {
+            resValue "string", "CodePushDeploymentKey", '"aOPBCFPY-RbHrR4TfL6a1KVYfrMQuosMkDR-L"'
+            // Note: It's a good idea to provide matchingFallbacks for the new buildType you create to prevent build issues
+            // Add the following line if not already there
+            matchingFallbacks = ['release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -161,6 +169,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            resValue "string", "CodePushDeploymentKey", '"A611Bid-bJKL3cW35xERyeowoqWMZjZTMBzPa"'
         }
     }
 
