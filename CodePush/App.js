@@ -3,7 +3,7 @@ import {View, Text, StatusBar} from 'react-native';
 import CodePush from 'react-native-code-push';
 
 const App = () => {
-  const env = 'dev';
+  const env = 'prod';
   const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
 
   return (
