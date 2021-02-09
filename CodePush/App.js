@@ -25,10 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-let codePushOptions = {
-  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-  installMode: CodePush.InstallMode.IMMEDIATE,
-};
+let codePushOptions = {checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME};
 
 const App = () => {
   const env = 'dev';
