@@ -18,7 +18,7 @@ const App = () => {
           style={{
             fontSize: 36,
           }}>
-          {whatEnv}
+          {whatEnv} Dev
         </Text>
       </View>
     </>
