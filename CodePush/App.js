@@ -1,5 +1,4 @@
-import React, {Component, createContext, useContext, useState} from 'react';
-import {View, Text, StatusBar} from 'react-native';
+import React, {Component, createContext, useContext} from 'react';
 import codePush from 'react-native-code-push';
 import Home from './Home';
 
@@ -7,7 +6,7 @@ const CodePushContext = createContext();
 
 export const useCodePush = () => useContext(CodePushContext);
 
-class App extends Component {
+class CodePushProvider extends Component {
   state = {
     status: null,
     progress: null,
@@ -58,13 +57,22 @@ class App extends Component {
           progress: this.state.progress,
           totalBytes: this.state.totalBytes,
         }}>
-        <Home />
+        {this.props.children}
       </CodePushContext.Provider>
     );
   }
 }
 
-export default codePush()(App);
+const App = () => (
+  <CodePushProvider>
+    <Home />
+  </CodePushProvider>
+);
+
+export default codePush({
+  InstallMode: CodePush.InstallMode.IMMEDIATE,
+  updateDialog: true,
+})(App);
 // export default codePush({
 //   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 //   installMode: codePush.InstallMode.IMMEDIATE,
