@@ -5,7 +5,7 @@ import {useCodePush} from './App';
 const Home = () => {
   const {progress, totalBytes, status} = useCodePush();
 
-  const env = 'dev';
+  const env = 'prod';
   const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
 
   return (
