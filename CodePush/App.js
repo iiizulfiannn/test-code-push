@@ -1,80 +1,70 @@
 import React, {Component, createContext, useContext, useState} from 'react';
 import {View, Text, StatusBar} from 'react-native';
 import codePush from 'react-native-code-push';
+import Home from './Home';
 
 const CodePushContext = createContext();
 
-const useCodePush = () => useContext(CodePushContext);
+export const useCodePush = () => useContext(CodePushContext);
 
-const CodePushProvider = () =>
-  codePush()(
-    class extends Component {
-      state = {
-        status: null,
-        progress: null,
-        totalBytes: null,
-      };
+class App extends Component {
+  state = {
+    status: null,
+    progress: null,
+    totalBytes: null,
+  };
 
-      codePushStatusDidChange(status) {
-        this.setState({status});
-      }
+  codePushStatusDidChange(status) {
+    switch (status) {
+      case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+        this.setState({status: `${status} Checking for update.`});
+        break;
+      case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+        this.setState({status: `${status} Downloading package.`});
+        break;
+      case codePush.SyncStatus.AWAITING_USER_ACTION:
+        this.setState({status: `${status} Awaiting user action.`});
+        break;
+      case codePush.SyncStatus.INSTALLING_UPDATE:
+        this.setState({status: `${status} Installing update.`});
+        break;
+      case codePush.SyncStatus.UP_TO_DATE:
+        this.setState({status: `${status} App up to date.`});
+        break;
+      case codePush.SyncStatus.UPDATE_IGNORED:
+        this.setState({status: `${status} Update cancelled by user.`});
+        break;
+      case codePush.SyncStatus.UPDATE_INSTALLED:
+        this.setState({
+          status: `${status} Update installed and will be applied on restart.`,
+        });
+        break;
+      case codePush.SyncStatus.UNKNOWN_ERROR:
+        this.setState({status: `${status} An unknown error occurred.`});
+        break;
+    }
+  }
 
-      codePushDownloadDidProgress(progress) {
-        this.setState({progress: progress.receivedBytes});
-        this.setState({totalBytes: progress.totalBytes});
-      }
+  codePushDownloadDidProgress(progress) {
+    this.setState({progress: progress.receivedBytes});
+    this.setState({totalBytes: progress.totalBytes});
+  }
 
-      render() {
-        return (
-          <CodePushContext.Provider
-            value={{
-              status: this.state.status,
-              progress: this.state.progress,
-              totalBytes: this.state.totalBytes,
-            }}>
-            {Home}
-          </CodePushContext.Provider>
-        );
-      }
-    },
-  );
-
-const Home = () => {
-  const {progress, totalBytes, status} = useCodePush();
-
-  const env = 'dev';
-  const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
-
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <View
-        style={{
-          flex: 1,
-          padding: 32,
+  render() {
+    return (
+      <CodePushContext.Provider
+        value={{
+          status: this.state.status,
+          progress: this.state.progress,
+          totalBytes: this.state.totalBytes,
         }}>
-        <Text style={{fontSize: 22}}>
-          {progress} / {totalBytes}
-        </Text>
-        <Text style={{fontSize: 22}}>status {status}</Text>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          padding: 32,
-        }}>
-        <Text
-          style={{
-            fontSize: 36,
-          }}>
-          {whatEnv} Dev
-        </Text>
-      </View>
-    </>
-  );
-};
+        <Home />
+      </CodePushContext.Provider>
+    );
+  }
+}
 
-export default CodePushProvider;
+export default codePush()(App);
 // export default codePush({
 //   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 //   installMode: codePush.InstallMode.IMMEDIATE,
