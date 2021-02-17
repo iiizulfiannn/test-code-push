@@ -26,6 +26,7 @@ class App extends Component {
         break;
       case codePush.SyncStatus.INSTALLING_UPDATE:
         this.setState({status: `${status} Installing update.`});
+        setTimeout(() => {}, 5000);
         break;
       case codePush.SyncStatus.UP_TO_DATE:
         this.setState({status: `${status} App up to date.`});
@@ -37,6 +38,7 @@ class App extends Component {
         this.setState({
           status: `${status} Update installed and will be applied on restart.`,
         });
+
         // codePush.restartApp();
         break;
       case codePush.SyncStatus.UNKNOWN_ERROR:
