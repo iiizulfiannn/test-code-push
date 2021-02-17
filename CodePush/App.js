@@ -6,7 +6,7 @@ const CodePushContext = createContext();
 
 export const useCodePush = () => useContext(CodePushContext);
 
-class CodePushProvider extends Component {
+class App extends Component {
   state = {
     status: null,
     progress: null,
@@ -37,7 +37,7 @@ class CodePushProvider extends Component {
         this.setState({
           status: `${status} Update installed and will be applied on restart.`,
         });
-        codePush.restartApp();
+        // codePush.restartApp();
         break;
       case codePush.SyncStatus.UNKNOWN_ERROR:
         this.setState({status: `${status} An unknown error occurred.`});
@@ -58,19 +58,18 @@ class CodePushProvider extends Component {
           progress: this.state.progress,
           totalBytes: this.state.totalBytes,
         }}>
-        {this.props.children}
+        <Home />
       </CodePushContext.Provider>
     );
   }
 }
 
-const App = () => (
-  <CodePushProvider>
-    <Home />
-  </CodePushProvider>
-);
+App = codePush({
+  updateDialog: true,
+  installMode: codePush.InstallMode.IMMEDIATE,
+})(App);
 
-export default codePush()(App);
+export default App;
 // export default codePush({
 //   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 //   installMode: codePush.InstallMode.IMMEDIATE,
