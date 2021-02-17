@@ -45,7 +45,9 @@ class App extends Component {
 
   codePushDownloadDidProgress(progress) {
     this.setState({
-      progress: progress ? (progress.receivedBytes / p.totalBytes) * 100 : 0,
+      progress: progress
+        ? (progress.receivedBytes / progress.totalBytes) * 100
+        : 0,
     });
   }
 
