@@ -65,7 +65,7 @@ class App extends Component {
 }
 
 App = codePush({
-  updateDialog: true,
+  // updateDialog: true,
   installMode: codePush.InstallMode.IMMEDIATE,
 })(App);
 
