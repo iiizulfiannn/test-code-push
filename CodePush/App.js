@@ -37,6 +37,7 @@ class CodePushProvider extends Component {
         this.setState({
           status: `${status} Update installed and will be applied on restart.`,
         });
+        codePush.restartApp();
         break;
       case codePush.SyncStatus.UNKNOWN_ERROR:
         this.setState({status: `${status} An unknown error occurred.`});
@@ -69,10 +70,7 @@ const App = () => (
   </CodePushProvider>
 );
 
-export default codePush({
-  InstallMode: CodePush.InstallMode.IMMEDIATE,
-  updateDialog: true,
-})(App);
+export default codePush()(App);
 // export default codePush({
 //   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 //   installMode: codePush.InstallMode.IMMEDIATE,
