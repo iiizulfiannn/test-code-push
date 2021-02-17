@@ -5,7 +5,7 @@ import {useCodePush} from './App';
 const Home = () => {
   const {progress, status} = useCodePush();
 
-  const env = 'prod';
+  const env = 'dev';
   const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
 
   return (
@@ -38,6 +38,7 @@ const Home = () => {
             }}>
             {whatEnv} Dev
           </Text>
+          <Text>Penambahan</Text>
         </View>
       </View>
     </>
