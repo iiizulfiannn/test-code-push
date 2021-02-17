@@ -20,7 +20,7 @@ const Home = () => {
           <View
             style={{
               backgroundColor: 'blue',
-              width: `${progress}%`,
+              width: progress ? `${progress}%` : 0,
               height: 10,
             }}
           />
