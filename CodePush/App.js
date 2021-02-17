@@ -66,7 +66,7 @@ class App extends Component {
 App = codePush({
   updateDialog: true,
   installMode: codePush.InstallMode.IMMEDIATE,
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  // checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 })(App);
 
 export default App;
