@@ -10,7 +10,6 @@ class App extends Component {
   state = {
     status: null,
     progress: null,
-    totalBytes: null,
   };
 
   codePushStatusDidChange(status) {
@@ -26,7 +25,6 @@ class App extends Component {
         break;
       case codePush.SyncStatus.INSTALLING_UPDATE:
         this.setState({status: `${status} Installing update.`});
-        setTimeout(() => {}, 5000);
         break;
       case codePush.SyncStatus.UP_TO_DATE:
         this.setState({status: `${status} App up to date.`});
@@ -38,8 +36,6 @@ class App extends Component {
         this.setState({
           status: `${status} Update installed and will be applied on restart.`,
         });
-
-        // codePush.restartApp();
         break;
       case codePush.SyncStatus.UNKNOWN_ERROR:
         this.setState({status: `${status} An unknown error occurred.`});
@@ -47,9 +43,10 @@ class App extends Component {
     }
   }
 
-  codePushDownloadDidProgress(progress) {
-    this.setState({progress: progress.receivedBytes});
-    this.setState({totalBytes: progress.totalBytes});
+  codePushDownloadDidProgress(p) {
+    this.setState({
+      progress: (p.receivedBytes / p.totalBytes) * 100,
+    });
   }
 
   render() {
@@ -58,7 +55,6 @@ class App extends Component {
         value={{
           status: this.state.status,
           progress: this.state.progress,
-          totalBytes: this.state.totalBytes,
         }}>
         <Home />
       </CodePushContext.Provider>

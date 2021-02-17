@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StatusBar, Text, View} from 'react-native';
 import {useCodePush} from './App';
 
 const Home = () => {
-  const {progress, totalBytes, status} = useCodePush();
+  const {progress, status} = useCodePush();
 
   const env = 'dev';
   const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
@@ -17,7 +17,14 @@ const Home = () => {
             flex: 1,
             padding: 32,
           }}>
-          <Text style={{fontSize: 22}}>{(progress / totalBytes) * 100}%</Text>
+          <View
+            style={{
+              backgroundColor: 'blue',
+              width: `${progress}%`,
+              height: 10,
+            }}
+          />
+          <Text style={{fontSize: 22}}>{progress}%</Text>
           <Text style={{fontSize: 22}}>status {status}</Text>
         </View>
         <View
