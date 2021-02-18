@@ -57,17 +57,19 @@ class App extends Component {
     const {status, progress} = this.state;
     return (
       <CodePushContext.Provider value={{status, progress}}>
-        <View
-          style={{
-            position: 'absolute',
-            backgroundColor: 'blue',
-            width: progress ? `${progress}%` : '100%',
-            // height: 10,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text>{progress}%</Text>
-        </View>
+        {progress && (
+          <View
+            style={{
+              position: 'absolute',
+              backgroundColor: 'blue',
+              width: progress ? `${progress}%` : '100%',
+              // height: 10,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text>{progress}%</Text>
+          </View>
+        )}
         <Home />
       </CodePushContext.Provider>
     );
