@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import {useCodePush} from './App';
+import KwKw from './KwKw';
 
 const Home = () => {
   const env = 'dev';
@@ -44,9 +45,19 @@ const Home = () => {
           </Text>
           <Text>Penambahan ++</Text>
           <Text>Pengurangan --</Text>
+          <Hem />
         </View>
       </View>
     </>
+  );
+};
+
+const Hem = () => {
+  return (
+    <View>
+      <Text>Haaai</Text>
+      <KwKw />
+    </View>
   );
 };
 
