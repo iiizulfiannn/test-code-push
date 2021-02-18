@@ -1,5 +1,5 @@
 import React, {Component, createContext, useContext} from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import codePush from 'react-native-code-push';
 import Home from './Home';
 
@@ -54,20 +54,18 @@ class App extends Component {
   }
 
   render() {
+    const {status, progress} = this.state;
     return (
-      <CodePushContext.Provider
-        value={{
-          status: this.state.status,
-          progress: this.state.progress,
-        }}>
+      <CodePushContext.Provider value={{status, progress}}>
         <View
           style={{
             position: 'absolute',
             backgroundColor: 'blue',
-            width: this.state.progress ? `${this.state.progress}%` : '100%',
+            width: progress ? `${progress}%` : '100%',
             height: 10,
-          }}
-        />
+          }}>
+          <Text>{progress}%</Text>
+        </View>
         <Home />
       </CodePushContext.Provider>
     );
