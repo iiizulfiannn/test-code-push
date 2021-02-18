@@ -1,5 +1,5 @@
 import React, {Component, createContext, useContext} from 'react';
-import {Text, View} from 'react-native';
+import {StatusBar, Text, View} from 'react-native';
 import codePush from 'react-native-code-push';
 import Home from './Home';
 
@@ -63,7 +63,7 @@ class App extends Component {
               position: 'absolute',
               backgroundColor: 'blue',
               width: `${progress}%`,
-              // height: 10,
+              marginTop: StatusBar.currentHeight,
               alignItems: 'center',
               justifyContent: 'center',
             }}>

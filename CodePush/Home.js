@@ -10,8 +10,8 @@ const Home = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <View style={{flex: 1}}>
+      <StatusBar barStyle="dark-content" translucent backgroundColor="white" />
+      <View style={{flex: 1, marginTop: StatusBar.currentHeight}}>
         <View
           style={{
             flex: 1,
