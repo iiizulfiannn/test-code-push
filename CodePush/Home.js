@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
-import {StatusBar, Text, View} from 'react-native';
+import {
+  Dimensions,
+  ProgressBarAndroid,
+  StatusBar,
+  Text,
+  View,
+} from 'react-native';
 import {useCodePush} from './App';
 
 const Home = () => {
-  const {progress, status} = useCodePush();
-
   const env = 'dev';
   const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
 
@@ -25,7 +29,7 @@ const Home = () => {
             }}
           /> */}
           {/* <Text style={{fontSize: 22}}>{progress}%</Text> */}
-          <Text style={{fontSize: 22}}>status {status}</Text>
+          {/* <Text style={{fontSize: 22}}>status {status}</Text> */}
         </View>
         <View
           style={{

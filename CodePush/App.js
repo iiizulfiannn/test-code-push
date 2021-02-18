@@ -1,5 +1,12 @@
 import React, {Component, createContext, useContext} from 'react';
-import {StatusBar, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  ProgressBarAndroid,
+  StatusBar,
+  Text,
+  View,
+} from 'react-native';
 import codePush from 'react-native-code-push';
 import Home from './Home';
 
@@ -47,9 +54,7 @@ class App extends Component {
 
   codePushDownloadDidProgress(progress) {
     this.setState({
-      progress: progress
-        ? (progress.receivedBytes / progress.totalBytes) * 100
-        : 0,
+      progress: (progress.receivedBytes / progress.totalBytes) * 100,
     });
   }
 
@@ -57,24 +62,52 @@ class App extends Component {
     const {status, progress} = this.state;
     return (
       <CodePushContext.Provider value={{status, progress}}>
-        {progress && (
-          <View
-            style={{
-              position: 'absolute',
-              backgroundColor: 'blue',
-              width: `${progress}%`,
-              marginTop: StatusBar.currentHeight,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text>{progress}%</Text>
-          </View>
-        )}
-        <Home />
+        {progress ? <UpdateApp /> : <Home />}
       </CodePushContext.Provider>
     );
   }
 }
+
+const UpdateApp = () => {
+  const {progress, status} = useCodePush();
+
+  return (
+    <View
+      style={{
+        position: 'absolute',
+        backgroundColor: 'rgba(52,52,52,.9)',
+        height: Dimensions.get('screen').height,
+        width: Dimensions.get('screen').width,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Text
+          style={{
+            fontSize: 22,
+            color: 'white',
+            marginVertical: 16,
+          }}>
+          Updating
+        </Text>
+        <ActivityIndicator size="large" color="green" />
+        <Text
+          style={{
+            fontSize: 18,
+            color: 'white',
+            marginVertical: 16,
+          }}>
+          {progress} %
+        </Text>
+      </View>
+    </View>
+  );
+};
+
 App = codePush({
   // updateDialog: true,
   installMode: codePush.InstallMode.IMMEDIATE,
