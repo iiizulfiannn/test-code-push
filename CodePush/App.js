@@ -62,7 +62,7 @@ class App extends Component {
             style={{
               position: 'absolute',
               backgroundColor: 'blue',
-              width: progress ? `${progress}%` : '100%',
+              width: `${progress}%`,
               // height: 10,
               alignItems: 'center',
               justifyContent: 'center',

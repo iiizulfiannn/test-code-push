@@ -38,7 +38,8 @@ const Home = () => {
             }}>
             {whatEnv} Dev
           </Text>
-          <Text>Penambahan</Text>
+          <Text>Penambahan ++</Text>
+          <Text>Pengurangan --</Text>
         </View>
       </View>
     </>
