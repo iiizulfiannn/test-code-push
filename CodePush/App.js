@@ -1,4 +1,5 @@
 import React, {Component, createContext, useContext} from 'react';
+import {View} from 'react-native';
 import codePush from 'react-native-code-push';
 import Home from './Home';
 
@@ -36,6 +37,7 @@ class App extends Component {
         this.setState({
           status: `${status} Update installed and will be applied on restart.`,
         });
+        codePush.restartApp();
         break;
       case codePush.SyncStatus.UNKNOWN_ERROR:
         this.setState({status: `${status} An unknown error occurred.`});
@@ -58,13 +60,21 @@ class App extends Component {
           status: this.state.status,
           progress: this.state.progress,
         }}>
+        <View
+          style={{
+            position: 'absolute',
+            backgroundColor: 'blue',
+            width: this.state.progress ? `${this.state.progress}%` : '100%',
+            height: 10,
+          }}
+        />
         <Home />
       </CodePushContext.Provider>
     );
   }
 }
 App = codePush({
-  updateDialog: true,
+  // updateDialog: true,
   installMode: codePush.InstallMode.IMMEDIATE,
   // checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 })(App);

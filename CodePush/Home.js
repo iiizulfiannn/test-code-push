@@ -17,14 +17,14 @@ const Home = () => {
             flex: 1,
             padding: 32,
           }}>
-          <View
+          {/* <View
             style={{
               backgroundColor: 'blue',
               width: progress ? `${progress}%` : 0,
               height: 10,
             }}
-          />
-          <Text style={{fontSize: 22}}>{progress}%</Text>
+          /> */}
+          {/* <Text style={{fontSize: 22}}>{progress}%</Text> */}
           <Text style={{fontSize: 22}}>status {status}</Text>
         </View>
         <View
