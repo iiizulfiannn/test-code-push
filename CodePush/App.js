@@ -62,7 +62,9 @@ class App extends Component {
             position: 'absolute',
             backgroundColor: 'blue',
             width: progress ? `${progress}%` : '100%',
-            height: 10,
+            // height: 10,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
           <Text>{progress}%</Text>
         </View>
