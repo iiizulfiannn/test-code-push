@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Dimensions,
   ProgressBarAndroid,
@@ -6,12 +6,16 @@ import {
   Text,
   View,
 } from 'react-native';
+import Config from 'react-native-config';
 import {useCodePush} from './App';
 import KwKw from './KwKw';
 
 const Home = () => {
-  const env = 'dev';
-  const whatEnv = env === 'dev' ? '__DEV__' : '__PROD__';
+  const environment = Config.ENVIRONMENT;
+  // const whatEnv =
+  //   environment === 'development'
+  //     ? '__DEV__'
+  //     : environment === 'production' && '__PROD__';
 
   return (
     <>
@@ -41,7 +45,7 @@ const Home = () => {
             style={{
               fontSize: 36,
             }}>
-            {whatEnv} Dev
+            {environment} Dev
           </Text>
           <Text>Penambahan ++</Text>
           <Text>Pengurangan --</Text>
