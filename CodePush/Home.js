@@ -12,10 +12,10 @@ import KwKw from './KwKw';
 
 const Home = () => {
   const environment = Config.ENVIRONMENT;
-  // const whatEnv =
-  //   environment === 'development'
-  //     ? '__DEV__'
-  //     : environment === 'production' && '__PROD__';
+  const whatEnv =
+    environment === 'development'
+      ? '__DEV__'
+      : environment === 'production' && '__PROD__';
 
   return (
     <>
@@ -45,7 +45,7 @@ const Home = () => {
             style={{
               fontSize: 36,
             }}>
-            {environment} Dev
+            {whatEnv}
           </Text>
           <Text>Penambahan ++</Text>
           <Text>Pengurangan --</Text>
